@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-21 16:50:39
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-03-21 18:03:37
+ * @LastEditTime: 2023-03-21 20:47:50
  */
 
 function ExpensiveWebCall(time: number): Promise<void> {
@@ -41,7 +41,24 @@ class TagTypeToHtml {
     this.tagType.set(TagType.Paragraph, 'p');
     this.tagType.set(TagType.HorizontalRule, 'hr');
   }
+  public OpeningTag(tagType: TagType): string {
+    return this.GetTag(tagType, `<`);
+  }
+
+  public ClosingTag(tagType: TagType): string {
+    return this.GetTag(tagType, `</`);
+  }
+
+  private GetTag(tagType: TagType, openingTagPattern: string): string {
+    let tag = this.tagType.get(tagType);
+    if(tag !== null) {
+      return `${openingTagPattern}${tag}>`;
+    }
+    return `${openingTagPattern}p>`;
+  }
 }
+
+// 
 
 class HtmlHandler {
   public TextChangeHandler(id: string, output: string): void {
