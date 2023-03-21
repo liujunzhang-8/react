@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-21 16:50:39
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-03-21 17:15:58
+ * @LastEditTime: 2023-03-21 18:03:37
  */
 
 function ExpensiveWebCall(time: number): Promise<void> {
@@ -18,6 +18,43 @@ class MyWebService {
       console.log(`Finished web service`)
     } catch (error) {
       console.log(`Caught ${error}`);
+    }
+  }
+}
+
+// 创建一个枚举
+enum TagType {
+  Paragraph,
+  Header1,
+  Header2,
+  Header3,
+  HorizontalRule
+}
+
+// 处理映射
+class TagTypeToHtml {
+  private readonly tagType: Map<TagType, string> = new Map<TagType, string>();
+  constructor() {
+    this.tagType.set(TagType.Header1, 'h1');
+    this.tagType.set(TagType.Header2, 'h2');
+    this.tagType.set(TagType.Header3, 'h3');
+    this.tagType.set(TagType.Paragraph, 'p');
+    this.tagType.set(TagType.HorizontalRule, 'hr');
+  }
+}
+
+class HtmlHandler {
+  public TextChangeHandler(id: string, output: string): void {
+    let markdown = <HTMLTextAreaElement>document.getElementById(id);
+    let markdownOutput = <HTMLTextAreaElement>document.getElementById(output);
+    if(markdown !== null) {
+      markdown.onkeyup = (e) => {
+        if(markdown.value) {
+          markdownOutput.innerHTML = markdown.value;
+        } else {
+          markdownOutput.innerHTML = '<p></p>'
+        }
+      }
     }
   }
 }
