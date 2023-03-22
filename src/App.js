@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-03-18 15:51:56
+ * @LastEditTime: 2023-03-22 10:39:30
  */
 import logo from './logo.svg';
 import './App.css';
@@ -29,17 +29,25 @@ import React from 'react';
 class App extends React.Component {
   // render是放在哪里的？——类的原型对象上，供实例使用
   // render中的this是谁？——类的实例对象 <=> 类组件实例对象
+  constructor(props) {
+    super(props)
+    // 初始化状态
+    this.state = {isHot: false}
+    // 解决changeWeather中this的指向问题
+    this.changeWeather = this.changeWeather.bind(this)
+  }
   render() {
+    // 读取状态
+    const {isHot} = this.state
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            React类式组件
-          </p>
-        </header>
-      </div>
+      <h1 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}</h1>
     );
+  }
+  changeWeather() {
+    // changeWeather放在哪里？—— Weather的原型对象上，供实例使用
+    // 由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用
+    // 类中的方法默认开启了局部严格模式，所以changeWeather中的this为undefined
+    console.log(this);
   }
 }
 
