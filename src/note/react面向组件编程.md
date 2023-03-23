@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 11:50:57
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-03-18 15:32:52
+ * @LastEditTime: 2023-03-22 11:16:36
 -->
 ### react中定义组件
 
@@ -17,6 +17,8 @@
       this.name = name
       this.age = age
     }
+    // 类中是可以直接写赋值语句的
+
     // 一般方法
     speak() {
       // speak方法放在哪里？——类的原型对象上，供实例使用
