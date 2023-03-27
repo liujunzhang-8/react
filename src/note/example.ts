@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-21 16:50:39
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-03-21 21:54:47
+ * @LastEditTime: 2023-03-27 21:52:30
  */
 
 function ExpensiveWebCall(time: number): Promise<void> {
@@ -76,19 +76,19 @@ class MarkdownDocument implements IMarkdownDocument {
   }
 }
 
-class Markdown {
-  public ToHtml(text: string): string {
-    let document : IMarkdownDocument = new MarkdownDocument();
-    let header1: Header1ChainHandler = new ChainOfResponsibilityFactory().Build(document);
-    let lines : string[] = text.split('\n');
-    for(let index = 0; index < lines.length; index++) {
-      let parseElement : ParseElement = new ParseElement();
-      parseElement.CurrentLine = lines[index];
-      header1.HandleRequest(parseElement);
-    }
-    return document.Get();
-  }
-}
+// class Markdown {
+//   public ToHtml(text: string): string {
+//     let document : IMarkdownDocument = new MarkdownDocument();
+//     let header1: Header1ChainHandler = new ChainOfResponsibilityFactory().Build(document);
+//     let lines : string[] = text.split('\n');
+//     for(let index = 0; index < lines.length; index++) {
+//       let parseElement : ParseElement = new ParseElement();
+//       parseElement.CurrentLine = lines[index];
+//       header1.HandleRequest(parseElement);
+//     }
+//     return document.Get();
+//   }
+// }
 
 class HtmlHandler {
   public TextChangeHandler(id: string, output: string): void {
