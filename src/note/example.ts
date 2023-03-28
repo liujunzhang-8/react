@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-21 16:50:39
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-03-27 21:52:30
+ * @LastEditTime: 2023-03-28 08:55:27
  */
 
 function ExpensiveWebCall(time: number): Promise<void> {
@@ -143,5 +143,23 @@ class LineParser {
       output[1] = value.substring{tag.length}
     }
     return output;
+  }
+}
+
+// 创建Log装饰器
+export function Log() {
+  return function(target: Object, propertyName: string, propertyDesciptor: PropertyDescriptor):PropertyDescriptor {
+    const method = propertyDesciptor.value;
+    propertyDesciptor.value = function(...args: unknown[]) {
+      const params = args.map(arg => JSON.stringify(arg)).join();
+      const result = method.apply(this, args);
+      if(args && args.length > 0) {
+        console.log(`Calling ${propertyName} with ${params}`);
+      } else {
+        console.log(`Calling ${propertyName}. No parameters present.`);
+      }
+      return result;
+    };
+    return propertyDesciptor
   }
 }
