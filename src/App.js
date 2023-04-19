@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-19 16:18:55
+ * @LastEditTime: 2023-04-19 17:50:12
  */
 import logo from './logo.svg';
 import './App.css';
@@ -54,6 +54,22 @@ class App extends React.Component {
   // }
 
   // render 调用几次？—— 1+n次，1是初始化的那次，n是状态更新的次数
+  // 初始化状态
+  state = {
+    username: '',
+    password: ''
+  }
+  saveUsername = (event) => {
+    this.setState({username: event.target.value})
+  }
+  savePassword = (event) => {
+    this.setState({password: event.target.value})
+  }
+  handleSubmit = (event) => {
+    event.preventDefault() // 阻止表单提交
+    const {username, password} = this.state
+    alert(`你输入的用户名是：${username}，你输入的密码是：${password}`)
+  }
   render() {
     // 读取状态
     // const {isHot, wind} = this.state
@@ -63,11 +79,16 @@ class App extends React.Component {
       //   <li>性别：{this.state.sex}</li>
       //   <li>年龄：{this.state.age}</li>
       // </ul>
-      <div>
-        <input ref={this.saveInfo} type="text" placeholder='点击按钮提示数据' />&nbsp;
-        <button onClick={this.showData}>点我提示左侧数据</button>&nbsp;
-        <input ref={(c) => this.input2 = c} onBlur={this.showData2} type="text" placeholder='失去焦点提示数据' />
-      </div>
+      // <div>
+      //   <input ref={this.saveInfo} type="text" placeholder='点击按钮提示数据' />&nbsp;
+      //   <button onClick={this.showData}>点我提示左侧数据</button>&nbsp;
+      //   <input ref={(c) => this.input2 = c} onBlur={this.showData2} type="text" placeholder='失去焦点提示数据' />
+      // </div>
+      <form onSubmit={this.handleSubmit}>
+        用户名：<input onChange={this.saveUsername} type='text' name='username' />
+        密码：<input onChange={this.savePassword} type='password' name='password' />
+        <button>登录</button>
+      </form>
     );
   }
   saveInfo = (c) => {
