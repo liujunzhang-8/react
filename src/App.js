@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-19 17:50:12
+ * @LastEditTime: 2023-04-19 20:59:26
  */
 import logo from './logo.svg';
 import './App.css';
@@ -59,11 +59,17 @@ class App extends React.Component {
     username: '',
     password: ''
   }
-  saveUsername = (event) => {
-    this.setState({username: event.target.value})
-  }
-  savePassword = (event) => {
-    this.setState({password: event.target.value})
+  // saveUsername = (event) => {
+  //   this.setState({username: event.target.value})
+  // }
+  // savePassword = (event) => {
+  //   this.setState({password: event.target.value})
+  // }
+  saveFormData = (dataType) => {
+    return (event) => {
+      console.log(dataType, event.target.value);
+      this.setState({[dataType]: event.target.value})
+    }
   }
   handleSubmit = (event) => {
     event.preventDefault() // 阻止表单提交
@@ -85,8 +91,8 @@ class App extends React.Component {
       //   <input ref={(c) => this.input2 = c} onBlur={this.showData2} type="text" placeholder='失去焦点提示数据' />
       // </div>
       <form onSubmit={this.handleSubmit}>
-        用户名：<input onChange={this.saveUsername} type='text' name='username' />
-        密码：<input onChange={this.savePassword} type='password' name='password' />
+        用户名：<input onChange={this.saveFormData('username')} type='text' name='username' />
+        密码：<input onChange={this.saveFormData('password')} type='password' name='password' />
         <button>登录</button>
       </form>
     );
