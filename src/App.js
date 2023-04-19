@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-19 15:59:51
+ * @LastEditTime: 2023-04-19 16:18:55
  */
 import logo from './logo.svg';
 import './App.css';
@@ -64,11 +64,14 @@ class App extends React.Component {
       //   <li>年龄：{this.state.age}</li>
       // </ul>
       <div>
-        <input ref={(c) => this.input1 = c} type="text" placeholder='点击按钮提示数据' />&nbsp;
+        <input ref={this.saveInfo} type="text" placeholder='点击按钮提示数据' />&nbsp;
         <button onClick={this.showData}>点我提示左侧数据</button>&nbsp;
         <input ref={(c) => this.input2 = c} onBlur={this.showData2} type="text" placeholder='失去焦点提示数据' />
       </div>
     );
+  }
+  saveInfo = (c) => {
+    this.input1 = c
   }
   // 展示左侧输入框数据
   showData = () => {
