@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-20 08:42:53
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-03-22 11:32:32
+ * @LastEditTime: 2023-04-19 15:19:25
 -->
 ### state —— 组件三大核心属性1
 
@@ -24,3 +24,11 @@
 ##### setState 的使用
 
 ### props —— 组件三大核心属性2
+
+1. 理解
+  > 每个组件对象都会有 props（properties 的简写）属性
+  > 组件标签的所有属性都保存在 props 中
+
+2. 作用
+  > 通过标签属性从组件外向组件内传递变化的数据
+  > 注意：组件内部不要修改 props 数据
