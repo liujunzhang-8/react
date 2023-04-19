@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-03-22 14:57:32
+ * @LastEditTime: 2023-04-19 16:18:55
  */
 import logo from './logo.svg';
 import './App.css';
@@ -38,7 +38,7 @@ class App extends React.Component {
   //   // this.changeWeather = this.changeWeather.bind(this)
   // }
   // 初始化状态
-  state = {name: 'tom', age: 18, sex: '女'}
+  // state = {name: 'tom', age: 18, sex: '女'}
 
   //  对标签属性进行类型，必要性的限制
   // static propTypes = {
@@ -48,22 +48,40 @@ class App extends React.Component {
   // }
 
   // 指定默认标签属性值
-  static defaultProps = {
-    sex: '男',
-    age: 18
-  }
+  // static defaultProps = {
+  //   sex: '男',
+  //   age: 18
+  // }
 
   // render 调用几次？—— 1+n次，1是初始化的那次，n是状态更新的次数
   render() {
     // 读取状态
-    const {isHot, wind} = this.state
+    // const {isHot, wind} = this.state
     return (
-      <ul>
-        <li>姓名：{this.state.name}</li>
-        <li>性别：{this.state.sex}</li>
-        <li>年龄：{this.state.age}</li>
-      </ul>
+      // <ul>
+      //   <li>姓名：{this.state.name}</li>
+      //   <li>性别：{this.state.sex}</li>
+      //   <li>年龄：{this.state.age}</li>
+      // </ul>
+      <div>
+        <input ref={this.saveInfo} type="text" placeholder='点击按钮提示数据' />&nbsp;
+        <button onClick={this.showData}>点我提示左侧数据</button>&nbsp;
+        <input ref={(c) => this.input2 = c} onBlur={this.showData2} type="text" placeholder='失去焦点提示数据' />
+      </div>
     );
+  }
+  saveInfo = (c) => {
+    this.input1 = c
+  }
+  // 展示左侧输入框数据
+  showData = () => {
+    const {input1} = this
+    alert(input1.value)
+  }
+  // 展示右侧输入框数据
+  showData2 = () => {
+    const {input2} = this
+    alert(input2.value)
   }
   // 自定义方法 —— 要用赋值语句的形式 + 箭头函数
   changeWeather = () => {
@@ -73,13 +91,13 @@ class App extends React.Component {
     console.log(this);
 
     // 获取原来的isHot值
-    const isHot = this.state.isHot
+    // const isHot = this.state.isHot
     // ⚠️：状态必须通过setState进行更新，且更新是一种合并，不是替换
-    this.setState({isHot: !isHot})
+    // this.setState({isHot: !isHot})
 
     // ⚠️严重注意：状态(state)不可直接更改，下面这行就是直接更改！！！
     // this.state.isHot = !isHot // 错误的写法
-    console.log(this.state.isHot);
+    // console.log(this.state.isHot);
   }
 }
 
