@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-20 08:42:53
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-19 21:06:17
+ * @LastEditTime: 2023-04-19 22:07:40
 -->
 ### state —— 组件三大核心属性1
 
@@ -52,3 +52,4 @@
   常见的高阶函数有：Promise、setTimeout、arr.map()等
 
 ### 函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式。
+
