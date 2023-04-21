@@ -4,11 +4,10 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-21 10:43:46
+ * @LastEditTime: 2023-04-21 16:29:16
  */
 import './App.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 // 类式组件
 class App extends React.Component {
