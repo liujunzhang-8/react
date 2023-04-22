@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-04-22 09:36:24
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-22 12:38:23
+ * @LastEditTime: 2023-04-22 12:48:57
  */
 import React, { Component } from "react";
 import './index.css'
@@ -22,6 +22,7 @@ export default class Item extends Component {
   handleCheck = (id) => {
     return (event) => {
       console.log(id, event.target.value);
+      this.props.updateTodo(id, event.target.checked)
     }
   }
   render() {
