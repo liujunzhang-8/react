@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-21 21:52:41
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-22 12:03:03
+ * @LastEditTime: 2023-04-22 12:51:03
  */
 import React, { Component } from 'react'
 import Header from './components/Header'
@@ -13,6 +13,8 @@ import Footer from './components/Footer'
 import './App.css'
 
 export default class App extends Component {
+  // 状态在哪里，操作状态的方法就在哪里
+  
   // 初始化状态
   state = {todos: [
     {id: '001', name: '跑步', done: true},
@@ -30,13 +32,25 @@ export default class App extends Component {
     // 更新状态
     this.setState({todos: newTodos})
   }
+
+  // updateTodo 用于更新一个todo对象
+  updateTodo = (id, done) => {
+    // 获取状态中的todos
+    const {todos} = this.state
+    // 匹配处理数据
+    const newTodos = todos.map((todoObj) => {
+      if(todoObj.id === id) return {...todoObj, done}
+      else return todoObj
+    })
+    this.setState({todos: newTodos})
+  }
   render() {
     const {todos} = this.state
     return (
       <div className='todo-container'>
         <div className='todo-wrap'>
           <Header addTodo={this.addTodo} />
-          <List todos={todos} />
+          <List todos={todos} updateTodo={this.updateTodo} />
           <Footer />
         </div>
       </div>
