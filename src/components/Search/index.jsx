@@ -4,7 +4,7 @@
  * @version:
  * @Date: 2023-04-23 11:09:21
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-23 11:53:57
+ * @LastEditTime: 2023-04-23 14:29:06
  */
 import axios from "axios";
 import React, { Component } from "react";
@@ -16,7 +16,9 @@ export default class Search extends Component {
     console.log(keyWord);
     // 发送网络请求
     axios.get(`https://api.github.com/search/users?q=${keyWord}`).then(
-      response => {console.log('成功了', response.data);},
+      response => {
+        this.props.saveUsers(response.data.items)
+      },
       error => {console.log('失败了', error);}
     )
   }
