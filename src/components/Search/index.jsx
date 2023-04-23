@@ -4,8 +4,9 @@
  * @version:
  * @Date: 2023-04-23 11:09:21
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-23 11:43:51
+ * @LastEditTime: 2023-04-23 11:53:57
  */
+import axios from "axios";
 import React, { Component } from "react";
 
 export default class Search extends Component {
@@ -14,7 +15,10 @@ export default class Search extends Component {
     const {keyWordElement: {value: keyWord}} = this
     console.log(keyWord);
     // 发送网络请求
-    
+    axios.get(`https://api.github.com/search/users?q=${keyWord}`).then(
+      response => {console.log('成功了', response.data);},
+      error => {console.log('失败了', error);}
+    )
   }
   render() {
     return (
