@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-23 17:03:02
+ * @LastEditTime: 2023-04-24 22:56:13
 -->
 ## 一、todoList案例相关知识点
   1. 拆分组件、实现静态组件，注意：className、style的写法   
@@ -53,4 +53,24 @@
       } catch {
         console.log('请求出错', error)
       }
+    ```
+
+## 三、路由的基本使用
+
+  1. 明确好界面中的导航区、展示区
+  2. 导航区的a标签改为Link标签  
+
+    ```javascript
+      <Link className="list-group-item" to="/about">
+        About
+      </Link>
+    ```
+  3. 展示区写Route标签进行路由的匹配
+  4. <App>的最外侧包裹一个<BrowerRouter>或<HashRouter>  
+
+    ```javascript
+      <Routes>
+        <Route path="/about" element={<About />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
     ```
