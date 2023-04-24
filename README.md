@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-23 17:03:02
+ * @LastEditTime: 2023-04-25 00:09:23
 -->
 ## 一、todoList案例相关知识点
   1. 拆分组件、实现静态组件，注意：className、style的写法   
@@ -54,3 +54,53 @@
         console.log('请求出错', error)
       }
     ```
+
+## 三、路由的基本使用
+
+  1. 明确好界面中的导航区、展示区
+  2. 导航区的a标签改为Link标签  
+
+    ```javascript
+      <Link className="list-group-item" to="/about">
+        About
+      </Link>
+    ```
+  3. 展示区写Route标签进行路由的匹配
+  4. <App>的最外侧包裹一个<BrowerRouter>或<HashRouter>  
+
+    ```javascript
+      <Routes>
+        <Route path="/about" element={<About />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    ```  
+
+## 四、路由组件与一般组件
+  1. 写法不同：   
+
+    一般组件：<demo />  
+
+    路由组件：<Route path="/home" element={<Home />} />  
+
+  2. 存放位置不同：   
+
+    一般组件：components   
+    路由组件：pages   
+
+  3. 接收到的props不同：   
+
+    一般组件：写组件标签时传递了什么，就能收到什么   
+    路由组件：接收到三个固定属性   
+      > history: go、goback、goforword  
+      > location:   
+      > match:  
+
+## 五、NavLink与封装NavLink
+
+  1. NavLink 可以实现路由链接的高亮，通过activeClassName指定样式名   
+  2. 标签体内容是一个特殊的标签属性   
+  3. 通过this.props.children可以获取标签体内容   
+
+## 六、Switch (react router 从第6版开始已经没有 Switch 组件了，改用 Routes 组件)
+  1. 通常情况下，path和component是一一对应的关系   
+  2. Switch可以提高路由匹配效率(单一匹配)

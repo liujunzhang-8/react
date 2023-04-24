@@ -35,10 +35,10 @@ export default class App extends Component {
               <div className="panel">
                 <div className="panel-body">
                   {/* 注册路由 */}
-                    <Routes>
-                      <Route path="/about" element={<About />} />
-                      <Route path="/home" element={<Home />} />
-                    </Routes>
+                  <Routes>
+                    <Route path="/about" element={<About />} />
+                    <Route path="/home" element={<Home />} />
+                  </Routes>
                 </div>
               </div>
             </div>

@@ -2,16 +2,16 @@
  * @Descripttion: 
  * @Author: Gorgio.Liu
  * @version: 
- * @Date: 2023-04-24 21:50:54
+ * @Date: 2023-04-24 21:51:13
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-24 21:54:22
+ * @LastEditTime: 2023-04-24 21:59:29
  */
 import React, { Component } from 'react'
 
-export default class About extends Component {
+export default class Home extends Component {
   render() {
     return (
-      <div>About</div>
+      <h3>我是Home的内容</h3>
     )
   }
 }
