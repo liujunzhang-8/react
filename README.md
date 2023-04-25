@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-25 00:09:23
+ * @LastEditTime: 2023-04-25 08:57:44
 -->
 ## 一、todoList案例相关知识点
   1. 拆分组件、实现静态组件，注意：className、style的写法   
@@ -103,4 +103,10 @@
 
 ## 六、Switch (react router 从第6版开始已经没有 Switch 组件了，改用 Routes 组件)
   1. 通常情况下，path和component是一一对应的关系   
-  2. Switch可以提高路由匹配效率(单一匹配)
+  2. Switch可以提高路由匹配效率(单一匹配)  
+
+## 七、解决多级路径刷新页面样式丢失的问题
+
+  1. public/index.html 中 引入样式时不写 ./，写 / （常用）   
+  2. public/index.html 中 引入样式时不写 ./，写 %PUBLIC_URL% （常用）  
+  3. 使用HashRouter
