@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-25 00:09:23
+ * @LastEditTime: 2023-04-25 09:41:59
 -->
 ## 一、todoList案例相关知识点
   1. 拆分组件、实现静态组件，注意：className、style的写法   
@@ -103,4 +103,55 @@
 
 ## 六、Switch (react router 从第6版开始已经没有 Switch 组件了，改用 Routes 组件)
   1. 通常情况下，path和component是一一对应的关系   
-  2. Switch可以提高路由匹配效率(单一匹配)
+  2. Switch可以提高路由匹配效率(单一匹配)  
+
+## 七、解决多级路径刷新页面样式丢失的问题
+
+  1. public/index.html 中 引入样式时不写 ./，写 / （常用）   
+  2. public/index.html 中 引入样式时不写 ./，写 %PUBLIC_URL% （常用）  
+  3. 使用HashRouter  
+
+## 八、路由的严格匹配与模糊匹配
+
+#### V6之前
+  1. 默认使用的是模糊匹配（简单记：【输入的路径】必须包含要【匹配的路径】，且顺序要一致）  
+  2. 开启严格匹配：<Route exact={true} path="/home" element={<Home />} />  
+  3. 严格匹配不要随便开启，需要再开，有些时候开启会导致无法继续匹配二级路由
+
+### V6中，exact属性不再需要
+  v6 内部算法改变，不再需要加exact实现精确匹配路由，默认就是匹配完整路径。  
+
+  如果需要旧的行为(模糊匹配)，路径后加/*  
+  ```javascript
+    <Route path="/products/*" element={<Products />} />
+
+    <Route path="/products/:productId" element={<ProductDetail />} />
+  ```
+    
+  测试： /prodcuts 显示  
+
+    /products/4 显示  
+
+    /products/haha 显示  
+
+    /products/haha/hehe 显示  
+
+  若：path属性取值为*时，可以匹配任何（非空）路径，同时该匹配拥有最低的优先级。可以用于设置404页面。  
+  v6 中，Route 先后顺序不再重要，React Router 能够自动找出最优匹配路径  
+
+## 九、路由重定向
+
+  ### v5
+  ```javascript
+    <Route path="about" render={() => <Redirect to="about-us" />} />
+  ```
+
+  ### v6
+  ```javascript
+    <Route path="*" element={<Navigate to="/" replace />} />
+  ```
+
+## 十、嵌套路由
+  1. 注册子路由时要写上父路由的path值  
+  2. 路由的匹配是按照注册路由的顺序进行的
+

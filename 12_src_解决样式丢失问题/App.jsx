@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home"; // Home 是路由组件
 import About from "./pages/About"; // About 是路由组件
 import Header from "./components/Header";  // Header是一般组件
@@ -27,8 +27,8 @@ export default class App extends Component {
                 <NavLink activeclassname='active' className="list-group-item" to="/home">
                   Home
                 </NavLink> */}
-                <MyNavLink to="/about">About</MyNavLink>
-                <MyNavLink to="/home">Home</MyNavLink>
+                <MyNavLink to="/atguigu/about">About</MyNavLink>
+                <MyNavLink to="/atguigu/home">Home</MyNavLink>
               </div>
             </div>
             <div className="col-6">
@@ -36,9 +36,8 @@ export default class App extends Component {
                 <div className="panel-body">
                   {/* 注册路由 */}
                     <Routes>
-                      <Route path="/about" element={<About />} />
-                      <Route path="/home/*" element={<Home />} />
-                      <Route path="*" element={<Navigate to="/home" replace  />} />
+                      <Route path="/atguigu/about" element={<About />} />
+                      <Route path="/atguigu/home" element={<Home />} />
                     </Routes>
                 </div>
               </div>
