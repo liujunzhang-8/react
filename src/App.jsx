@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home"; // Home 是路由组件
 import About from "./pages/About"; // About 是路由组件
 import Header from "./components/Header";  // Header是一般组件
@@ -38,6 +38,7 @@ export default class App extends Component {
                     <Routes>
                       <Route path="/about" element={<About />} />
                       <Route path="/home/*" element={<Home />} />
+                      <Route path="*" element={<Navigate to="/home" replace  />} />
                     </Routes>
                 </div>
               </div>

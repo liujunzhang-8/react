@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-25 09:23:46
+ * @LastEditTime: 2023-04-25 09:41:59
 -->
 ## 一、todoList案例相关知识点
   1. 拆分组件、实现静态组件，注意：className、style的写法   
@@ -128,7 +128,6 @@
     <Route path="/products/:productId" element={<ProductDetail />} />
   ```
     
-
   测试： /prodcuts 显示  
 
     /products/4 显示  
@@ -138,4 +137,21 @@
     /products/haha/hehe 显示  
 
   若：path属性取值为*时，可以匹配任何（非空）路径，同时该匹配拥有最低的优先级。可以用于设置404页面。  
-  v6 中，Route 先后顺序不再重要，React Router 能够自动找出最优匹配路径
+  v6 中，Route 先后顺序不再重要，React Router 能够自动找出最优匹配路径  
+
+## 九、路由重定向
+
+  ### v5
+  ```javascript
+    <Route path="about" render={() => <Redirect to="about-us" />} />
+  ```
+
+  ### v6
+  ```javascript
+    <Route path="*" element={<Navigate to="/" replace />} />
+  ```
+
+## 十、嵌套路由
+  1. 注册子路由时要写上父路由的path值  
+  2. 路由的匹配是按照注册路由的顺序进行的
+
