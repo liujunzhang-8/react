@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-25 10:34:20
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-25 22:07:11
+ * @LastEditTime: 2023-04-25 22:49:52
  */
 import React from 'react'
 import {useParams, useSearchParams, useLocation} from 'react-router-dom'
@@ -21,14 +21,14 @@ export default function Detail () {
   // const {id, title} = params
 
   // 接收search参数
-  // let [params] = useSearchParams()
-  // const id = params.get('id')
-  // const title = params.get('title')
+  let [params] = useSearchParams()
+  const id = params.get('id')
+  const title = params.get('title')
 
   // 接收state参数
-  const params = useLocation()
-  console.log(params);
-  const {id, title} = params.state
+  // const params = useLocation()
+  // console.log(params);
+  // const {id, title} = params.state
   
   const findResult = DetailData.find((detailObj) => {
     return detailObj.id === id

@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-03-18 08:56:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-25 22:20:18
+ * @LastEditTime: 2023-04-25 23:23:43
 -->
 ## 一、todoList案例相关知识点
   1. 拆分组件、实现静态组件，注意：className、style的写法   
@@ -170,5 +170,18 @@
     注册路由(无需声明，正常注册即可)：<Route path='/demo/test' component={Test} />  
     接收参数：this.props.location.search  
     备注：刷新也可以保留数据   
+
+## 十三、BrowserRouter与HashRouter的区别
+
+  1. 底层原理不一样：  
+    BrowserRouter使用的是H5的history API，不兼容IE9及以下版本。  
+    HashRouter使用的是URL的哈希值  
+  2. path表现形式不一样：  
+    BrowserRouter的路径中没有#，例如：localhost:3000/demo/test  
+    HashRouter的路径包含#，例如：localhost:3000/#/demo/test   
+  3. 刷新后对新路由state参数的影响  
+    BrowserRouter没有任何影响，因为state保存在history对象中。  
+    HashRouter刷新后会导致路由state参数的丢失！！！  
+  4. 备注：HashRouter可以用于解决一些路径错误相关的问题。
 
 
