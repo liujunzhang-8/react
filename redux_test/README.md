@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-26 21:07:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-28 23:06:46
+ * @LastEditTime: 2023-04-28 23:38:21
 -->
 ## 1. 求和案例_redux精简版
   1. 去除Count组件自身的状态  
@@ -82,3 +82,7 @@
       import {composeWithDevTools} from 'redux-devtools-extension'
       const store = createStore(allReducer, composeWithDevTools(applyMiddleware(thunk)))
     ```
+
+## 8. 求和案例_react-redux最终版
+  1. 所有变量名字要规范，尽量触发对象的简写形式  
+  2. reducers文件夹中，编写index.js 专门用于汇总并暴露所有的reducer
