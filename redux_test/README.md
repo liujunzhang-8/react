@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-26 21:07:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-28 16:21:12
+ * @LastEditTime: 2023-04-28 23:06:46
 -->
 ## 1. 求和案例_redux精简版
   1. 去除Count组件自身的状态  
@@ -73,4 +73,12 @@
   1. 定义一个Person组件，和Count组件通过redux共享数据  
   2. 为Person组件编写：reducer、action，配置constant常量  
   3. 重点：Person 的reducer和Count的Reducer要使用combineReducers进行合并，合并后的总状态是一个对象！！！  
-  4. 交给store的是总reducer，最后注意在组件中取出状态的时候，记得 "取到位"
+  4. 交给store的是总reducer，最后注意在组件中取出状态的时候，记得 "取到位"  
+
+## 7. 求和案例_react-redux开发者工具的使用  
+  1. yarn add redux-devtools-extension  
+  2. store 中进行配置  
+    ```javascript
+      import {composeWithDevTools} from 'redux-devtools-extension'
+      const store = createStore(allReducer, composeWithDevTools(applyMiddleware(thunk)))
+    ```

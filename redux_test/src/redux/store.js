@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-26 21:33:32
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-28 15:56:40
+ * @LastEditTime: 2023-04-28 22:58:35
  */
 /**
  * 该文件专门用于暴露一个store对象，整个应用只有一个store对象
@@ -18,6 +18,8 @@ import  countReducer from './reducers/count'
 import  personReducer from './reducers/person'
 // 引入redux-thunk，用于支持异步action
 import thunk from 'redux-thunk'
+// 引入redux-devtools-extension
+import {composeWithDevTools} from 'redux-devtools-extension'
 
 const allReducer = combineReducers({
   he: countReducer,
@@ -25,4 +27,4 @@ const allReducer = combineReducers({
 })
 
 // 暴露store
-export default  createStore(allReducer, applyMiddleware(thunk))
+export default  createStore(allReducer, composeWithDevTools(applyMiddleware(thunk)))
