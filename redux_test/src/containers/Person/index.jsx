@@ -4,26 +4,26 @@
  * @version:
  * @Date: 2023-04-28 12:21:23
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-28 16:14:44
+ * @LastEditTime: 2023-04-28 23:32:34
  */
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
 import { connect } from "react-redux";
-import { createAddPersonAction } from "../../redux/actions/person";
+import { addPerson } from "../../redux/actions/person";
 
 class Person extends Component {
   addPerson = () => {
     const name = this.nameNode.value;
     const age = this.ageNode.value;
     const personObj = { id: nanoid(), name, age };
-    this.props.jiayiren(personObj)
+    this.props.addPerson(personObj)
     this.nameNode.value = ''
     this.ageNode.value = ''
   };
   render() {
     return (
       <div>
-        <h2>我是Person组件, 上方组件求和为{this.props.he}</h2>
+        <h2>我是Person组件, 上方组件求和为{this.props.count}</h2>
         <input
           ref={(c) => (this.nameNode = c)}
           type="text"
@@ -37,7 +37,7 @@ class Person extends Component {
         />
         <button onClick={this.addPerson}>添加</button>
         <ul>
-          {this.props.yiduiren.map((p) => {
+          {this.props.personArr.map((p) => {
             return (
               <li key={p.id}>
                 {p.name} --- {p.age}
@@ -51,6 +51,9 @@ class Person extends Component {
 }
 
 export default connect(
-  (state) => ({ yiduiren: state.rens, he: state.he}), // 映射装药
-  {jiayiren: createAddPersonAction}
+  (state) => ({ 
+    personArr: state.persons, 
+    count: state.count
+  }), // 映射装药
+  {addPerson}
 )(Person);

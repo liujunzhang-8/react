@@ -4,11 +4,11 @@
  * @version: 
  * @Date: 2023-04-28 11:51:17
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-28 12:07:15
+ * @LastEditTime: 2023-04-28 23:10:51
  */
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { createIncrementAction } from '../../redux/actions/count_action'
+import { createIncrementAction } from '../../redux/actions/count'
 
 class Count extends Component {
   add = () => {

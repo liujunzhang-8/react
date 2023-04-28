@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-26 21:12:24
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-28 11:21:43
+ * @LastEditTime: 2023-04-28 23:10:04
  */
 import React from "react";
 import ReactDOM from 'react-dom/client';
@@ -22,6 +22,7 @@ import {Provider} from 'react-redux'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    {/* 此处需要用provider包裹App，目的是让App所有的后代容器组件都能接收到store */}
     <Provider store={store}>
       <App />
     </Provider>
