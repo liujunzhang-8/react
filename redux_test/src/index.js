@@ -4,12 +4,13 @@
  * @version: 
  * @Date: 2023-04-26 21:12:24
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-27 08:19:22
+ * @LastEditTime: 2023-04-28 11:21:43
  */
 import React from "react";
 import ReactDOM from 'react-dom/client';
 import App from "./App";
-// import store from "./redux/store";
+import store from "./redux/store";
+import {Provider} from 'react-redux'
 
 // 监测redux中状态的改变，若redux的状态发生了改变，那么重新渲染App组件
 // store.subscribe(() => {
@@ -21,6 +22,8 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
