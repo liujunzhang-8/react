@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-29 07:38:05
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-29 08:23:56
+ * @LastEditTime: 2023-04-29 09:07:14
 -->
 ## 1. setState
 
@@ -48,4 +48,30 @@
 
 ### 1. React Hook/Hooks 是什么？
 
+```
+  (1). Hook 是React 16.8.0版本增加的新特性/新语法  
+  (2). 可以让你在函数组件中使用 state 以及其他的 React 特新  
+```
+
 ### 2. 三个常用的Hook
+
+```
+  (1). State Hook: React.useState()  
+  (2). Effect Hook: React.useEffect()  
+  (3). Ref Hook: React.useRef()  
+```
+
+### 3. State Hook
+
+```
+  (1). State Hook让函数组件也可以有state状态，并进行状态数据的读写操作  
+  (2). 语法：const [xxx, setXxx] = React.useState(initValue)  
+  (3). useState() 说明：  
+    参数：第一次初始化指定的值在内部做缓存  
+    返回值：包含2个元素的数组，第1个为内部当前状态值，第2个为更新状态值的函数  
+  (4). setXxx()2种写法：
+    setXxx(newValue)：参数为非函数值，直接指定新的状态值，内部用其覆盖原来的状态值  
+    setXxx(value => newValue)：参数为函数，接收原本的状态值，返回新的状态值，内部用其覆盖原来的状态值
+```
+
+### 4. Effect Hook
