@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-29 07:38:05
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-29 09:07:14
+ * @LastEditTime: 2023-04-29 10:50:02
 -->
 ## 1. setState
 
@@ -27,7 +27,7 @@
       (3). 如果需要在setState()执行后获取最新的状态数据，要在第二个callback函数中读取。
 ```
 
-## LazyLoad
+## 2. LazyLoad
 
 ### 路由组件的lazyLoad
 
@@ -44,7 +44,7 @@
   </Suspense>
 ```
 
-## Hooks
+## 3. Hooks
 
 ### 1. React Hook/Hooks 是什么？
 
@@ -75,3 +75,32 @@
 ```
 
 ### 4. Effect Hook
+
+```
+  (1). Effect Hook 可以让你在函数组件中执行副作用操作(用于模拟类组件中的生命周期钩子)  
+  (2). React中的副作用操作：  
+    发ajax请求数据获取  
+    设置订阅/启动定时器  
+    手动更改真实DOM  
+  (3). 语法和说明：  
+    useEffect(() => {
+      <!-- 在此可以执行任何带副作用操作 -->
+      return () => { // 在组件卸载前执行
+        <!-- 在此做一些收尾工作，比如清除定时器/取消订阅等 -->
+      }
+    }, [stateValue]) // 如果指定的是[]，回调函数只会在第一次render() 后执行
+  (4). 可以把 useEffect Hook 看做如下三个函数的组合  
+    componentDidMount()
+    componentDidUpdate()
+    componentWillUnmount()
+```
+
+### Ref Hook
+
+```
+  (1). Ref Hook可以在函数组件中存储/查找组件内的标签或任意其它数据
+  (2). 语法：const refContainer = useRef()
+  (3). 作用：保存标签对象，功能与React.createRef()一样
+```
+
+## 4. Fragment
