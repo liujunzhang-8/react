@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-29 07:38:05
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-29 10:50:02
+ * @LastEditTime: 2023-04-29 11:55:36
 -->
 ## 1. setState
 
@@ -104,3 +104,48 @@
 ```
 
 ## 4. Fragment
+
+### 使用
+
+```javascript
+<Fragment></Fragment>
+<></>
+```
+
+### 作用
+  可以不用必须有一个真实的DOM根标签了
+
+## 5. Context
+
+### 理解
+  一种组件间通信方式，常用于 [祖组件] 与 [后代组件] 间通信  
+
+### 使用
+
+```
+  (1). 创建Context容器对象：
+        const XxxContext = React.createContext()
+
+  (2). 渲染子组件时，外面包裹xxxContext.Provider，通过value属性给后代组件传递数据：
+        <xxxContext.Provider value={数据} >
+          子组件
+        </xxxContext.Provider>
+
+  (3). 后代组件读取数据：
+        <!-- 第一种方式：仅适用于类组件 -->
+        static contextType = xxxContext // 声明接收context
+        this.context // 读取context中的value数据
+
+        <!-- 第二种方式：函数组件与类组件都可以 -->
+        <xxxContext.Consumer>
+          {
+            value => ( // value就是context中的value数据
+              要显示的内容
+            )
+          }
+        </xxxContext.Consumer>
+```
+
+### 注意
+
+   在应用中一般不用context, 一般都用它的封装react插件
