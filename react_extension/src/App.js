@@ -4,10 +4,10 @@
  * @version: 
  * @Date: 2023-04-29 07:41:42
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-29 11:31:39
+ * @LastEditTime: 2023-04-29 19:20:28
  */
 import React, { Component } from 'react'
-import Demo from './components/5_Context'
+import Demo from './components/8_ErrorBoundary/Parent'
 
 export default class App extends Component {
   render() {
