@@ -1,0 +1,19 @@
+.parent {
+  width: 500px;
+  background-color: orange;
+  padding: 20px;
+}
+
+.a {
+  width: 100%;
+  background-color: gray;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.b {
+  width: 100%;
+  background-color: cornflowerblue;
+  margin-top: 30px;
+  padding: 20px;
+}
