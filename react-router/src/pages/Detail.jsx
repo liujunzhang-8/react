@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-30 12:13:45
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-02 20:03:01
+ * @LastEditTime: 2023-05-02 20:35:24
  */
 import React from 'react'
 import { useParams, useSearchParams, useLocation, useMatch } from 'react-router-dom'
@@ -16,16 +16,20 @@ export default function Detail() {
   // console.log(x);
 
   // 路由的search传参
-  const [search, setSearch] = useSearchParams()
-  const id = search.get('id')
-  const title = search.get('title')
-  const content = search.get('content')
+  // const [search, setSearch] = useSearchParams()
+  // const id = search.get('id')
+  // const title = search.get('title')
+  // const content = search.get('content')
+
+  // 路由的state传参
+  const params = useLocation()
+  const {state: {id, title, content}} = params
 
   return (
     <ul>
-      <li>
+      {/* <li>
         <button onClick={() => setSearch('id=008&title=哈哈&content=嘻嘻')}>点我更新一下收到的值</button>
-      </li>
+      </li> */}
       <li>消息编号：{id}</li>
       <li>消息标题：{title}</li>
       <li>消息内容：{content}</li>

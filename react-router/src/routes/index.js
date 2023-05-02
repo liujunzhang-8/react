@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-29 20:56:15
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-30 12:22:05
+ * @LastEditTime: 2023-05-02 20:22:21
  */
 
 import { Navigate } from "react-router-dom";
@@ -32,6 +32,8 @@ export default [
         children: [
           {
             // path: 'detail/:id/:title/:content', params传参
+
+            // search传参与state传参
             path: 'detail',
             element: <Detail />
           }
