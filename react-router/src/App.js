@@ -4,11 +4,12 @@
  * @version: 
  * @Date: 2023-04-29 20:08:04
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-30 12:06:22
+ * @LastEditTime: 2023-05-02 20:37:21
  */
 import React from 'react'
 import { NavLink, useRoutes } from "react-router-dom";
 import routes from './routes';
+import Header from './components/Header'
 
 
 export default function App() {
@@ -17,11 +18,7 @@ export default function App() {
   return (
     <div>
       <div className="row">
-        <div className="col-xs-offset-2 col-8">
-          <div className="page-header">
-            <h2>React Router Demo</h2>
-          </div>
-        </div>
+        <Header />
       </div>
       <div className="row">
         <div className="col-xs-offset-2 col-2">
