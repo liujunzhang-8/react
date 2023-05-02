@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-04-29 20:56:15
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-04-30 10:25:08
+ * @LastEditTime: 2023-04-30 12:22:05
  */
 
 import { Navigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import Home from "../pages/Home";
 import About from '../pages/about';
 import Message from "../pages/Message";
 import News from "../pages/News";
+import Detail from "../pages/Detail";
 export default [
   {
     path: '/about',
@@ -27,7 +28,14 @@ export default [
       },
       {
         path: 'message',
-        element: <Message />
+        element: <Message />,
+        children: [
+          {
+            // path: 'detail/:id/:title/:content', params传参
+            path: 'detail',
+            element: <Detail />
+          }
+        ]
       },
     ]
   },
