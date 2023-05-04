@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-05-04 14:24:38
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-04 15:32:06
+ * @LastEditTime: 2023-05-04 15:56:42
  */
 import {REACT_TEXT} from "./constants";
 
@@ -23,6 +23,9 @@ function render(vdom, container) {
  * @param {*} vdom 
  */
 function createDOM(vdom) {
+  // if(typeof vdom === 'string' || typeof vdom === 'number') {
+  //   return document.createTextNode(vdom);
+  // }
   let {type, props} = vdom;
   let dom;  // 先获取真实DOM元素
   if(type === REACT_TEXT) { // 如果是一个文本元素，就创建一个文本节点
