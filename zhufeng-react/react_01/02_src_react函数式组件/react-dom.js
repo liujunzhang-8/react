@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-05-04 14:24:38
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-04 16:40:38
+ * @LastEditTime: 2023-05-04 15:56:42
  */
 import {REACT_TEXT} from "./constants";
 
@@ -31,11 +31,7 @@ function createDOM(vdom) {
   if(type === REACT_TEXT) { // 如果是一个文本元素，就创建一个文本节点
     dom = document.createTextNode(props.content);
   } else if(typeof type === 'function') { // 说明这是一个react函数组件的react元素
-    if(type.isReactComponent) { // 说明它是一个类组件
-      return mountClassCop(vdom)
-    } else {
-      return mountFunCop(vdom)
-    }
+    return mountFunCop(vdom)
   } else {
     dom = document.createElement(type); // 原生DOM类型
   }
@@ -49,15 +45,8 @@ function createDOM(vdom) {
     }
   }
   // 让虚拟DOM的dom属性指向它的真实DOM
-  // vdom.dom = dom;
+  vdom.dom = dom;
   return dom;
-}
-
-function mountClassCop(vdom) {
-  let {type, props} = vdom;
-  let classInstance = new type(props)
-  let renderVdom = classInstance.render()
-  return createDOM(renderVdom)
 }
 
 function mountFunCop(vdom) {
