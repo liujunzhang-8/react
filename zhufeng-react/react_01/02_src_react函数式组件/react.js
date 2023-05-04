@@ -4,11 +4,10 @@
  * @version: 
  * @Date: 2023-05-04 14:24:15
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-04 16:34:42
+ * @LastEditTime: 2023-05-04 15:56:07
  */
 
 import { wrapToVdom } from "./utils";
-import { Component } from "./Component";
 
 /**
  * 
@@ -41,8 +40,7 @@ function createElement (type, config, children) {
 }
 
 const React = {
-  createElement,
-  Component
+  createElement
 }
 
 export default React;
