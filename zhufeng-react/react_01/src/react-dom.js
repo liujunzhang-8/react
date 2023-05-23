@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-05-04 14:24:38
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-04 16:40:38
+ * @LastEditTime: 2023-05-23 09:46:38
  */
 import {REACT_TEXT} from "./constants";
 
@@ -23,9 +23,9 @@ function render(vdom, container) {
  * @param {*} vdom 
  */
 function createDOM(vdom) {
-  // if(typeof vdom === 'string' || typeof vdom === 'number') {
-  //   return document.createTextNode(vdom);
-  // }
+  if(typeof vdom === 'string' || typeof vdom === 'number') {
+    return document.createTextNode(vdom);
+  }
   let {type, props} = vdom;
   let dom;  // 先获取真实DOM元素
   if(type === REACT_TEXT) { // 如果是一个文本元素，就创建一个文本节点
@@ -57,6 +57,7 @@ function mountClassCop(vdom) {
   let {type, props} = vdom;
   let classInstance = new type(props)
   let renderVdom = classInstance.render()
+  classInstance.oldRenderVdom = renderVdom; // 挂载的时候计算出虚拟DOM，然后把老的renderVdom挂载到类的实例上
   return createDOM(renderVdom)
 }
 
@@ -81,6 +82,8 @@ function updateProps(dom, oldProps, newProps) {
       for(let attr in styleObj) {
         dom.style[attr] = styleObj[attr];
       } 
+    } else if(key.startsWith('on')) {
+      dom[key.toLocaleLowerCase()] = newProps[key]; // dom.onclick = handleClick
     } else {
       dom[key]= newProps[key];
     }
