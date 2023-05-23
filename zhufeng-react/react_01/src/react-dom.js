@@ -4,9 +4,10 @@
  * @version: 
  * @Date: 2023-05-04 14:24:38
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-23 09:46:38
+ * @LastEditTime: 2023-05-23 11:38:30
  */
 import {REACT_TEXT} from "./constants";
+import {addEvent} from './event.js'
 
 /**
  * 把虚拟DOM转成真实DOM插入容器中
@@ -23,9 +24,9 @@ function render(vdom, container) {
  * @param {*} vdom 
  */
 function createDOM(vdom) {
-  if(typeof vdom === 'string' || typeof vdom === 'number') {
-    return document.createTextNode(vdom);
-  }
+  // if(typeof vdom === 'string' || typeof vdom === 'number') {
+  //   return document.createTextNode(vdom);
+  // }
   let {type, props} = vdom;
   let dom;  // 先获取真实DOM元素
   if(type === REACT_TEXT) { // 如果是一个文本元素，就创建一个文本节点
@@ -57,6 +58,7 @@ function mountClassCop(vdom) {
   let {type, props} = vdom;
   let classInstance = new type(props)
   let renderVdom = classInstance.render()
+  // TODO 5. 类组件更新
   classInstance.oldRenderVdom = renderVdom; // 挂载的时候计算出虚拟DOM，然后把老的renderVdom挂载到类的实例上
   return createDOM(renderVdom)
 }
@@ -64,6 +66,7 @@ function mountClassCop(vdom) {
 function mountFunCop(vdom) {
   let {type, props} = vdom;
   let renderVdom = type(props);
+  vdom.oldRenderVdom = renderVdom;
   return createDOM(renderVdom);
 }
 
@@ -83,11 +86,41 @@ function updateProps(dom, oldProps, newProps) {
         dom.style[attr] = styleObj[attr];
       } 
     } else if(key.startsWith('on')) {
-      dom[key.toLocaleLowerCase()] = newProps[key]; // dom.onclick = handleClick
+      // dom[key.toLocaleLowerCase()] = newProps[key]; // dom.onclick = handleClick
+      addEvent(dom, key.toLocaleLowerCase(), newProps[key]);
     } else {
       dom[key]= newProps[key];
     }
   }
+}
+
+/**
+ * 根据vdom返回真实DOM
+ * @param {*} vdom 
+ */
+export function findDOM(vdom) {
+  let {type} = vdom;
+  let dom;
+  if(typeof type === 'function') { // 虚拟DOM组件的类型的话
+    // 找到他的oldRenderVdom的真实DOM元素
+    dom = findDOM(vdom.oldRenderVdom)
+  } else {
+    dom = vdom.dom
+  }
+  return dom;
+}
+
+/**
+ * 比较新旧的虚拟DOM，找出差异，更新到真实的DOM
+ * 现在还没有实现dom-diff
+ * @param {*} parentDOM 
+ * @param {*} oldVdom 
+ * @param {*} newVdom 
+ */
+export function compareTwoVdom(parentDOM, oldVdom, newVdom) {
+  let oldDOM = findDOM(oldVdom); // findDOM
+  let newDOM = createDOM(newVdom);
+  parentDOM.replaceChild(newDOM, oldDOM);
 }
 
 const ReactDOM = {
