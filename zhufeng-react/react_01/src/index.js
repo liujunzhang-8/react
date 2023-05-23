@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-05-02 22:18:14
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-23 09:32:15
+ * @LastEditTime: 2023-05-23 11:43:23
  */
 import React from './react';
 import ReactDOM from './react-dom';
@@ -43,7 +43,7 @@ class Counter extends React.Component{
     return (
       <div>
         <h1>number：{this.state.number}</h1>
-        <button onClick={this.handleClick}>点击+</button>
+        <button onClick={this.handleClick}>+</button>
       </div>
     )
   }
