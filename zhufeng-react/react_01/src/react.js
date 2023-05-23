@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-05-04 14:24:15
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-04 16:34:42
+ * @LastEditTime: 2023-05-23 09:39:24
  */
 
 import { wrapToVdom } from "./utils";
@@ -30,7 +30,7 @@ function createElement (type, config, children) {
   if(arguments.length > 3) { // 如果参数大于3个，说明有多个儿子
     // 核心就是把字符串或者说数字类型的节点转换成对象的形式
     props.children = Array.prototype.slice.call(arguments, 2).map(wrapToVdom); // 只能处理类数组
-  } else if(children) {
+  } else {
     // children 可能是hi一个字符串，也可能是一个数字，也可能是个null undefined，也可能是一个数组
     props.children = wrapToVdom(children);
   }

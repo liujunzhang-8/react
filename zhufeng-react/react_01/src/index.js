@@ -4,10 +4,11 @@
  * @version: 
  * @Date: 2023-05-02 22:18:14
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-04 17:32:26
+ * @LastEditTime: 2023-05-23 09:32:15
  */
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from './react';
+import ReactDOM from './react-dom';
+// import {createRoot, render} from 'react-dom/client';
 
 /**
  * 类组件的数据来源有两个地方，父组件传过来的属性，自己内部的状态
@@ -19,10 +20,7 @@ import ReactDOM from 'react-dom';
  * 不能管控的地方就是同步，非批量的
  */
 class Counter extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {number: 0}; // 唯一可以给状态直接赋值的地方就是构造函数
-  }
+  state = {number: 0}
   // 组件挂载完成
   // componentDidMount() {
   //   this.timer = setInterval(() => this.tick(), 1000)
@@ -30,8 +28,10 @@ class Counter extends React.Component{
 
   // 类的属性 这样的写法函数里的this永远指向组件的实例
   handleClick = (event) => {
-    // setState 可以修改状态
-    this.setState({number: this.state.number + 1})
+    // 回调是在更新的时候执行,partialState和callback没有一对一的关系
+    this.setState({number: this.state.number + 1}, () => {
+      console.log('callback1', this.state.number);
+    })
   }
 
   // 组件将要卸载
@@ -39,9 +39,10 @@ class Counter extends React.Component{
   //   clearInterval(this.timer)
   // }
   render() {
+    console.log('render');
     return (
       <div>
-        <h1>{this.state.number}</h1>
+        <h1>number：{this.state.number}</h1>
         <button onClick={this.handleClick}>点击+</button>
       </div>
     )
@@ -51,5 +52,8 @@ class Counter extends React.Component{
  * React事件命名采用小驼峰式 camelCase onClick
  * 原生事件里传函数名字符串，在React传一个函数的引用地址，真实的函数定义
  */
-let element = <Counter />
-ReactDOM.render(element, document.getElementById('root'));
+// let element = <Counter />
+// const container = document.getElementById('root')
+// const root = createRoot(container)
+// root.render(element);
+ReactDOM.render(<Counter />, document.getElementById('root'));
