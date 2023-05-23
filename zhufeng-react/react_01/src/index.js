@@ -4,10 +4,10 @@
  * @version: 
  * @Date: 2023-05-02 22:18:14
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-04 17:32:26
+ * @LastEditTime: 2023-05-22 12:54:09
  */
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot, render} from 'react-dom/client';
 
 /**
  * 类组件的数据来源有两个地方，父组件传过来的属性，自己内部的状态
@@ -52,4 +52,6 @@ class Counter extends React.Component{
  * 原生事件里传函数名字符串，在React传一个函数的引用地址，真实的函数定义
  */
 let element = <Counter />
-ReactDOM.render(element, document.getElementById('root'));
+const container = document.getElementById('root')
+const root = createRoot(container)
+root.render(element);
