@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-05-04 14:24:15
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-23 09:39:24
+ * @LastEditTime: 2023-05-23 18:04:09
  */
 
 import { wrapToVdom } from "./utils";
@@ -22,9 +22,15 @@ import { Component } from "./Component";
  * @returns 
  */
 function createElement (type, config, children) {
+  let ref; // 是用来获取虚拟DOM实例的
+  let key; // 用来区分同一个父亲的不同儿子的
   if(config) {
     delete config.__source;
     delete config.__self;
+    ref = config.ref;
+    delete config.ref
+    key = config.ref
+    delete config.key
   }
   let props = {...config};
   if(arguments.length > 3) { // 如果参数大于3个，说明有多个儿子
@@ -37,12 +43,23 @@ function createElement (type, config, children) {
   return {
     type,
     props,
+    ref,
+    key
   }
+}
+
+function createRef() {
+  return {current: null}
+}
+
+function forwardRef() {
+  
 }
 
 const React = {
   createElement,
-  Component
+  Component,
+  createRef
 }
 
 export default React;
