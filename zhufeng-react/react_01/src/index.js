@@ -4,11 +4,11 @@
  * @version: 
  * @Date: 2023-05-02 22:18:14
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-23 11:43:23
+ * @LastEditTime: 2023-05-23 19:46:10
  */
-import React from './react';
-import ReactDOM from './react-dom';
-// import {createRoot, render} from 'react-dom/client';
+import React from 'react';
+// import ReactDOM from './react-dom';
+import {createRoot, render} from 'react-dom/client';
 
 /**
  * 类组件的数据来源有两个地方，父组件传过来的属性，自己内部的状态
@@ -52,8 +52,8 @@ class Counter extends React.Component{
  * React事件命名采用小驼峰式 camelCase onClick
  * 原生事件里传函数名字符串，在React传一个函数的引用地址，真实的函数定义
  */
-// let element = <Counter />
-// const container = document.getElementById('root')
-// const root = createRoot(container)
-// root.render(element);
-ReactDOM.render(<Counter />, document.getElementById('root'));
+let element = <Counter />
+const container = document.getElementById('root')
+const root = createRoot(container)
+root.render(element);
+// ReactDOM.render(<Counter />, document.getElementById('root'));
