@@ -4,9 +4,8 @@
  * @version: 
  * @Date: 2023-05-04 16:15:56
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-24 22:27:46
+ * @LastEditTime: 2023-05-24 21:07:08
  */
-import { type } from '@testing-library/user-event/dist/type'
 import {findDOM, compareTwoVdom} from './react-dom'
 export let updateQueue = {
   isBatchingUpdate: false, // 通过此变量来控制是否批量更新
@@ -60,33 +59,15 @@ class Updater {
       state = {...state, ...nextState}
     });
     pendingStates.length = 0;  // 清空等待更新的队列
-    // this.callbacks.forEach(callback => callback())
-    // this.callbacks.length = 0;
+    this.callbacks.forEach(callback => callback())
+    this.callbacks.length = 0;
     return state; // 返回新状态
   }
 }
 
 function shouldUpdate(classInstance, nextProps, nextState) {
-  let willUpdate = true; // 是否要更新，默认值是true
-  if(classInstance.shouldComponentUpdate && (!classInstance.shouldComponentUpdate(nextProps, nextState))) {
-    willUpdate = false;
-  }
-  if(willUpdate && classInstance.componentWillUpdate) {
-    classInstance.componentWillUpdate();
-  }
-  // 其实不管要不要更新，属性和状态都要更新为最新的
-  if(nextProps) classInstance.props = nextProps
-  if(classInstance.constructor.getDerivedStateFromProps) {
-    let nextState = classInstance.constructor.getDerivedStateFromProps(nextProps, classInstance)
-    if(nextState) {
-      classInstance.state = nextState
-    }
-  } else {
-    classInstance.state = nextState // 永远指向最新的状态
-  }
-  if(willUpdate) {
-    classInstance.forceUpdate(); // 然后调用类组件实例的updateComponent进行更新
-  }
+  classInstance.state = nextState; // 真正修改实例的状态了
+  classInstance.forceUpdate(); // 然后调用类组件实例的updateComponent进行更新
 }
 
 export class Component {
@@ -110,14 +91,8 @@ export class Component {
     let oldRenderVdom = this.oldRenderVdom; // 老的虚拟DOM
     // 根据老的虚拟DOM查到老的真实DOM，
     let oldDOM = findDOM(oldRenderVdom)
-    if(this.constructor.contextType) {
-      this.context = type.constructor.contextType.Provider._value
-    }
     let newRenderVdom = this.render(); // 计算新的虚拟DOM
-    let extraArgs;
-    if(this.getSnapshotBeforeUpdate) {
-      extraArgs = this.getSnapshotBeforeUpdate()
-    }
+    let extraArgs = this.getSnapshotBeforeUpdate();
     compareTwoVdom(oldDOM.parentNode, oldRenderVdom, newRenderVdom); // 比较差异，把更新同步到真实DOM上
     this.oldRenderVdom = newRenderVdom;
     if(this.componentDidUpdate) {

@@ -4,12 +4,11 @@
  * @version: 
  * @Date: 2023-05-04 14:24:15
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-24 22:04:40
+ * @LastEditTime: 2023-05-23 18:04:09
  */
 
 import { wrapToVdom } from "./utils";
 import { Component } from "./Component";
-import { REACT_FORWARD_REF_TYPE } from "./constants";
 
 /**
  * 
@@ -53,28 +52,14 @@ function createRef() {
   return {current: null}
 }
 
-function forwardRef(render) {
-  return {
-    $$typeof: REACT_FORWARD_REF_TYPE,
-    render // 原来那个函数件
-  }
-}
-
-function createContext() {
-  function Provider({value, children}) {
-    Provider._value = value;
-    return children
-  }
-
-  return {Provider};
+function forwardRef() {
+  
 }
 
 const React = {
   createElement,
   Component,
-  createRef,
-  forwardRef,
-  createContext
+  createRef
 }
 
 export default React;
