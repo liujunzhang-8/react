@@ -4,84 +4,49 @@
  * @version: 
  * @Date: 2023-05-02 22:18:14
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-25 17:52:54
+ * @LastEditTime: 2023-05-25 19:12:43
  */
 import React from 'react';
 // import ReactDOM from './react-dom';
-import {createRoot, render} from 'react-dom/client';
+import {createRoot} from 'react-dom/client';
 
-let ThemeContext = React.createContext()
-let {Provider, Consumer} = ThemeContext // Consumer 一般用在函数组件中
-function Header() {
-  return (
-    <ThemeContext.Consumer>
-      {
-        value => (
-          <div style={{margin: '10px', border: `5px solid ${value.color}`, padding: '5px'}}>
-            头部
-            <Title />
-          </div>
-        )
+// 基于反向继承：拦截生命周期、state、渲染过程
+// 假如说我们有一个第三方组件库
+class AntDesignButton extends React.Component {
+  state = {name: '张三'}
+  componentDidMount() {
+    console.log('AntDesignButton componentDidMount');
+  }
+  render() {
+    console.log('AntDesignButton render');
+    return <button name={this.state.name}>{this.props.title}</button>
+  }
+}
+
+const wrapper = OldComponent => {
+  return class extends OldComponent {
+    constructor(props) {
+      super(props) // super 指的是父类的构造函数
+      this.state = {...this.state, number: 0}
+    }
+    state = {number: 0}
+    componentDidMount() {
+      console.log('wrapper componentDidMount');
+    }
+    handleClick = () => {
+      this.setState({number: this.state.number+1})
+    }
+    render() {
+      let renderElement = super.render()
+      let newProps = {
+        ...renderElement.props,
+        onClick: this.handleClick
       }
-    </ThemeContext.Consumer>
-  )
-}
-
-class Title extends React.Component {
-  static contextType = ThemeContext
-  render() {
-    return (
-      <div style={{margin: '10px', border: `5px solid ${this.context.color}`, padding: '5px'}}>
-        头部
-      </div>
-    )
-  }
-}
-
-class Main extends React.Component {
-  static contextType = ThemeContext
-  render() {
-    return (
-      <div style={{margin: '10px', border: `5px solid ${this.context.color}`, padding: '5px'}}>
-        主体
-        <Content />
-      </div>
-    )
-  }
-}
-
-class Content extends React.Component {
-  static contextType = ThemeContext
-  render() {
-    return (
-      <div style={{margin: '10px', border: `5px solid ${this.context.color}`, padding: '5px'}}>
-        内容
-        <button onClick={() => this.context.changeColor('red')}>变红</button>
-        <button onClick={() => this.context.changeColor('yellow')}>变黄</button>
-      </div>
-    )
-  }
-}
-
-class Page extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {color: 'red'}
-  }
-  changeColor = (color) => {
-    this.setState({color})
-  }
-  render() {
-    let value = {color: this.state.color, changeColor: this.changeColor};
-    return (
-      <Provider value={value}>
-        <div style={{margin: '10px', border: `5px solid ${this.state.color}`, padding: '5px', width: '200px'}}>
-          主页
-          <Header />
-          <Main />
-        </div>
-      </Provider>
-    )
+      // renderElement.props.children = this.state.number;
+      // renderElement.props.onClick = this.onClick
+      let cloneElement = React.cloneElement(renderElement, newProps, this.state.number);
+      return cloneElement
+    }
   }
 }
 
@@ -89,7 +54,8 @@ class Page extends React.Component {
  * React事件命名采用小驼峰式 camelCase onClick
  * 原生事件里传函数名字符串，在React传一个函数的引用地址，真实的函数定义
  */
-let element = <Page />
+let WrappedAntDesignButton = wrapper(AntDesignButton)
+let element = <WrappedAntDesignButton title="这是标题" />
 const container = document.getElementById('root')
 const root = createRoot(container)
 root.render(element);

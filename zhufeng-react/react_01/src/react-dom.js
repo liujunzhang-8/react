@@ -4,10 +4,10 @@
  * @version: 
  * @Date: 2023-05-04 14:24:38
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-24 22:54:32
+ * @LastEditTime: 2023-05-25 19:39:50
  */
 import {addEvent} from './event.js'
-import {REACT_TEXT, REACT_FORWARD_REF_TYPE } from "./constants";
+import {REACT_TEXT, REACT_FORWARD_REF_TYPE, REACT_PROVIDER, REACT_CONTEXT } from "./constants";
 
 /**
  * 把虚拟DOM转成真实DOM插入容器中
@@ -27,7 +27,9 @@ function render(vdom, container) {
 function createDOM(vdom) {
   let {type, props, ref} = vdom;
   let dom;  // 先获取真实DOM元素
-  if(type&&type.$$typeof === REACT_FORWARD_REF_TYPE) {
+  if(type&&type.$$typeof === REACT_PROVIDER) {
+    return mountProviderComponent(vdom)
+  } else if(type&&type.$$typeof === REACT_FORWARD_REF_TYPE) {
     return mountForwardComponent(vdom)
   } else if(type === REACT_TEXT) { // 如果是一个文本元素，就创建一个文本节点
     dom = document.createTextNode(props.content);
@@ -55,6 +57,13 @@ function createDOM(vdom) {
   vdom.dom = dom;
   if(ref) ref.current = dom; // ref.current属性指向真实DOM的实例
   return dom;
+}
+
+function mountProviderComponent(vdom) { // vdom={}
+  let {type, props} = vdom;
+  let renderVdom = props.children;
+  vdom.oldRenderVdom = renderVdom;
+  return createDOM(renderVdom);
 }
 
 function mountForwardComponent(vdom) {
@@ -113,7 +122,9 @@ function updateProps(dom, oldProps, newProps) {
       // dom[key.toLocaleLowerCase()] = newProps[key]; // dom.onclick = handleClick
       addEvent(dom, key.toLocaleLowerCase(), newProps[key]);
     } else {
-      dom[key]= newProps[key];
+      if(newProps[key]) {
+        dom[key]= newProps[key];
+      }
     }
   }
 }
