@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-05-04 14:24:38
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-24 21:20:54
+ * @LastEditTime: 2023-05-24 22:54:32
  */
 import {addEvent} from './event.js'
 import {REACT_TEXT, REACT_FORWARD_REF_TYPE } from "./constants";
@@ -37,8 +37,10 @@ function createDOM(vdom) {
     } else {
       return mountFunCop(vdom)
     }
-  } else {
+  } else if(typeof type === 'string') {
     dom = document.createElement(type); // 原生DOM类型
+  } else {
+    throw new Error(`无法处理的元素类型`, JSON.stringify(type, null, 2))
   }
 
   if(props) {
@@ -50,8 +52,8 @@ function createDOM(vdom) {
     }
   }
   // 让虚拟DOM的dom属性指向它的真实DOM
-  // vdom.dom = dom;
-  if(ref) ref.current = dom;
+  vdom.dom = dom;
+  if(ref) ref.current = dom; // ref.current属性指向真实DOM的实例
   return dom;
 }
 
@@ -66,7 +68,11 @@ function mountClassCop(vdom) {
   let {type, props, ref} = vdom;
   let defaultProps = type.defaultProps || {}
   let classInstance = new type({...defaultProps, ...props});
-  vdom.classInstance = classInstance
+  if(type.contextType) {
+    classInstance.context = type.contextType.Provider._value
+  }
+  console.log(vdom, '++++');
+  vdom.classInstance = classInstance;
   if(classInstance.componentWillMount) {
     classInstance.componentWillMount();
   }
@@ -163,9 +169,9 @@ export function compareTwoVdom(parentDOM, oldVdom, newVdom, nextDOM) {
   } else { // 老的有，新的也有，类型也一样，需要服用老节点，进行深度的递归dom diff了
     updateElement(oldVdom, newVdom)
   }
-  // let oldDOM = findDOM(oldVdom); // findDOM
-  // let newDOM = createDOM(newVdom);
-  // parentDOM.replaceChild(newDOM, oldDOM);
+  let oldDOM = findDOM(oldVdom); // findDOM
+  let newDOM = createDOM(newVdom);
+  parentDOM.replaceChild(newDOM, oldDOM);
 }
 
 function updateElement(oldVdom, newVdom) {
