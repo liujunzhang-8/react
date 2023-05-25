@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-05-04 14:24:15
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-24 22:04:40
+ * @LastEditTime: 2023-05-25 17:53:59
  */
 
 import { wrapToVdom } from "./utils";
@@ -65,8 +65,11 @@ function createContext() {
     Provider._value = value;
     return children
   }
+  function Consumer({children}) {
+    return children(Provider._value);
+  }
 
-  return {Provider};
+  return {Provider, Consumer};
 }
 
 const React = {
