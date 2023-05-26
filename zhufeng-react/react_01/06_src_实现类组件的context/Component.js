@@ -4,7 +4,7 @@
  * @version: 
  * @Date: 2023-05-04 16:15:56
  * @LastEditors: Gorgio.Liu
- * @LastEditTime: 2023-05-25 19:44:06
+ * @LastEditTime: 2023-05-24 22:27:46
  */
 import { type } from '@testing-library/user-event/dist/type'
 import {findDOM, compareTwoVdom} from './react-dom'
@@ -111,7 +111,7 @@ export class Component {
     // 根据老的虚拟DOM查到老的真实DOM，
     let oldDOM = findDOM(oldRenderVdom)
     if(this.constructor.contextType) {
-      this.context = this.constructor.contextType._currentValue
+      this.context = type.constructor.contextType.Provider._value
     }
     let newRenderVdom = this.render(); // 计算新的虚拟DOM
     let extraArgs;
